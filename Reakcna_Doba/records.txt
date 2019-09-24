@@ -2,11 +2,11 @@ Alica:147
 Jano:234
 Adrian:250
 Matus:396
+Ondrej:485
 Patrik:489
 Ondrej:502
-kio:522
+Kiko:516
 Filip:527
-kiko:537
 Stevo:544
 Peter:555
 Alexandra:602
@@ -14,5 +14,7 @@ Ferko:603
 Slavka:904
 Natalia:986
 Kiko:1234
+Deges:1772
 Mirinda:1833
-Matej:9999
+Erik:1980
+RadoSLAV:4283

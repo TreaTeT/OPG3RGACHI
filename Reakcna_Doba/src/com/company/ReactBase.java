@@ -11,8 +11,8 @@ package com.company;
     Cieľom hráča je v najrýchlejšom možnom čase opäť stlačiť ENTER.
     Program vypíše čas v milisekundách, ktorý uplynul od zobrazenia povelu START po stlačenie ENTER
     a zaradí ho do usporiadanej tabuľky výkonov (Meno hráča + výkon)
-    TODO Na obrazovku vypíše, kde sa daný výkon v tabuľke nachádza a to tak, že vypíše 5 bezprostredne predchádzajúcich výkonov aktuálny výkon 5 bezprostredne nasledujúcich výkonov
-   `TODO To všetko v tvare Poradové číslo v tabuľke výkonov Tab6 Meno hráča Tab25 výkon
+    Na obrazovku vypíše, kde sa daný výkon v tabuľke nachádza a to tak, že vypíše 5 bezprostredne predchádzajúcich výkonov aktuálny výkon 5 bezprostredne nasledujúcich výkonov
+    To všetko v tvare Poradové číslo v tabuľke výkonov Tab6 Meno hráča Tab25 výkon
     Celú tabuľku s novým záznamom zapíše do textového súboru na disk, každý riadok v tvare MenoHraca:vykon -> I guess in the file there is no poradove cislo
 
     Hra po spustení načíta zo súboru aktuálnu tabuľku výkonov a požiada hráča o prihlásenie (zadanie mena)
@@ -25,13 +25,7 @@ package com.company;
 
     Hru naprogramujte ako konzolovú aplikáciu aj ako aplikáciu s GUI. Využite pritom MVC.
     Pre meranie času využite funkciu System.currentTimeMillis();
-    TODO Hra musí ošetriť aj predčasné stlačenie pred zobrazením START ako chybu a potrestať ju (spôsob trestu je na vás)
-
-    filip = newPlayer
-    erik  = import&save records
-    kiko  = menu
-
-
+    Hra musí ošetriť aj predčasné stlačenie pred zobrazením START ako chybu a potrestať ju (spôsob trestu je na vás)
 */
 
 import java.io.*;
@@ -81,7 +75,6 @@ public class ReactBase {
 
     public void ImportRecords() throws IOException{
         BufferedReader in = new BufferedReader(new FileReader("records.txt"));
-
         String line ;
         String pom [] ;
         while((line = in.readLine()) != null){
@@ -134,40 +127,21 @@ public class ReactBase {
         String enter  = inputstr.readLine();
         System.out.println("Pozooor!");
         int result = r.nextInt(6000-500) + 500;
+         // GN mate
         Thread.sleep(result);
+        //start
         System.out.println("Start");
         long start = System.currentTimeMillis(); // start timer
         // wait for user to type enter
-         // wait for input
         enter  = inputstr.readLine();
         long end  = System.currentTimeMillis(); // end timer
-
         long userTime  = end - start ; // calculate time in millis
-
-        // idea is that we will call sleep() with random time in miliseconds that will range from 500 to 6000
-        // then we will sout START and check what is the current time in millis
-        // then we will wait for user to press enter again and check what is the current time in millis
-        // then we will substract first time from the second and that should get us reaction time in millis and we need to convert that to seconds
-
         return (int)userTime;
     }
 
     public void Sort(String who, int record){
-        // who  => name
-        // record => time
-        boolean check = false; // check if there was player in the list with name of player currently playing
-        for( Player pl : Players){ // loop through players
-            if(pl.getName().equals(who)){ // if there already is player with that name
-                check = true;
-                if(pl.getTime() > record){ // and if his reaction time is worse than the last one
-                    pl.setTime(record); // set his time in record to this new time
-                }
-            }else {
-                continue;
-            }
-        }
-        if(check == false){ // if there is no player with that name in list
-            Players.add(new Player(who , record)); // add a new player into the lsit
+        if(record != 0){
+            Players.add(new Player(who, record)); // add a new player into the lsit
         }
         // SORTING PART
         Collections.sort(Players); // Sort them with use of comparable
@@ -176,35 +150,44 @@ public class ReactBase {
     public void ShowRecords(String who, int record){
         // if there are parameters than i need to show +-5
         // if params are empty we are doing top10
-        int index  = 0 ;
-        if(who.length() == 0){ // means that params are empty
-            for(int i = 0 ; i < 10 ; i++ ){
-               Player pl = Players.get(i);
-               System.out.println(i+1 + " " + pl.getName() + ":" + pl.getTime());
-            }
-        }else{
-            for(Player pl : Players) {
-                if (pl.getName().equals(who)) {
-                    index = Players.indexOf(pl);
-                    break;
+        if(who.length() != 0 && record == 0){
+            System.out.println("False start!");
+        }else {
+            int index = 0;
+            if (who.length() == 0) { // means that params are empty
+                for (int i = 0; i < 10; i++) {
+                    Player pl = Players.get(i);
+                    System.out.println(i + 1 + " " + pl.getName() + ":" + pl.getTime());
+                }
+            } else {
+                for (Player pl : Players) {
+                    if (pl.getTime() == record) {
+                        index = Players.indexOf(pl);
+                        break;
+                    }
+                }
+
+                int start ;
+                int end ;
+                // calculating start
+                if(index-5  < 0){
+                    start = 0;
+                }else{
+                    start = index -5;
+                }
+                //calculating end
+                if(index+5 > Players.size()-1){
+                    end = Players.size()-1;
+                }else{
+                    end  = index +5;
+                }
+                // souting them boys
+                for (int i = start; i <= end; i++) {
+                    System.out.println(i+1 + " " + Players.get(i).getName() + ":"+  Players.get(i).getTime());
                 }
             }
-            for(int i = 0 ; i < Players.size() ; i++){
-                if(i == (index-5)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index-4)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index-3)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index-2)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index-1)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index+1)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index+2)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index+3)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index+4)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-                if(i == (index+5)){ System.out.println(i+1 + " " + Players.get(i).getName() + ":" + Players.get(i).getTime() ); }
-            }
-         }
+        }
     }
-
     public void SaveRecords() throws IOException{
         BufferedWriter output = new BufferedWriter(new FileWriter("records.txt"));
         for(Player pl : Players){
@@ -212,9 +195,5 @@ public class ReactBase {
             output.newLine();
         }
         output.close();
-
     }
 }
-
-
-
