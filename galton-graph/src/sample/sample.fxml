@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="574.0" prefWidth="704.0">
+         <children>
+            <TextField fx:id="pocetHodov" layoutX="129.0" layoutY="120.0" />
+            <TextField fx:id="pocetKociek" layoutX="129.0" layoutY="53.0" />
+            <Text layoutX="164.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Počet kociek" wrappingWidth="79.609375">
+               <font>
+                  <Font name="Roboto Light" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="164.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Počet hodov" wrappingWidth="79.609375">
+               <font>
+                  <Font name="Roboto Light" size="14.0" />
+               </font>
+            </Text>
+            <AreaChart fx:id="chart" layoutX="42.0" layoutY="194.0" prefHeight="374.0" prefWidth="621.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </AreaChart>
+            <Button fx:id="hod" layoutX="178.0" layoutY="158.0" mnemonicParsing="false" onAction="#rucaj" text="Rucaj!" />
+            <TextField fx:id="pocetHladin" layoutX="416.0" layoutY="49.0" />
+            <Text layoutX="445.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pocet Guliciek">
+               <font>
+                  <Font name="Roboto Light" size="14.0" />
+               </font>
+            </Text>
+            <Button fx:id="gulicky" layoutX="461.0" layoutY="155.0" mnemonicParsing="false" onAction="#Gulickuj" text="Gulickuj" />
+            <TextField fx:id="pocetGuliciek" layoutX="412.0" layoutY="118.0" />
+            <Text layoutX="452.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pocet hladin">
+               <font>
+                  <Font name="Roboto Light" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
