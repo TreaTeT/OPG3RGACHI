@@ -2,4 +2,4 @@
 
 Zadania z programovania 
 
-3. + partially 4. ročník SPŠE
+3. a partially 4. ročník SPŠE
